@@ -4,6 +4,7 @@ import { HDNodeWallet, Mnemonic } from 'ethers';
 interface Wallet {
     index: number;
     address: string;
+    privateKey:string
 }
 
 const WalletManager: React.FC = () => {
@@ -39,7 +40,7 @@ const WalletManager: React.FC = () => {
             // Add the new wallet to the state
             setWallets([
                 ...wallets,
-                { index: newIndex, address: derivedWallet.address },
+                { index: newIndex, address: derivedWallet.address, privateKey:derivedWallet.privateKey },
             ]);
         } catch (error) {
             console.error('Error deriving wallet:', error);
@@ -77,6 +78,7 @@ const WalletManager: React.FC = () => {
                             <li key={wallet.index} style={{ marginBottom: '10px' }}>
                                 <strong>Index:</strong> {wallet.index} <br />
                                 <strong>Address:</strong> {wallet.address}
+                                <strong>Private Key:</strong> {wallet.privateKey}
                             </li>
                         ))}
                     </ul>
